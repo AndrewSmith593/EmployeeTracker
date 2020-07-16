@@ -1,23 +1,28 @@
 ### Schema
 
-CREATE DATABASE parties_db;
+CREATE DATABASE employee_db;
 
-USE parties_db;
+USE employee_db;
 
-CREATE TABLE clients
+CREATE TABLE departments
 (
-	id int NOT NULL AUTO_INCREMENT,
-	client_name varchar(255) NOT NULL,
-	PRIMARY KEY (id)
+	id INT PRIMARY KEY,
+	dept_name VARCHAR(30)
 );
 
-CREATE TABLE parties
+CREATE TABLE roles
 (
-	id int NOT NULL AUTO_INCREMENT,
-	party_name varchar(255) NOT NULL,
-	party_type varchar(255) NOT NULL,
-	party_cost int NOT NULL,
-	client_id int NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (client_id) REFERENCES clients(id)
+	id INT PRIMARY KEY,
+	title VARCHAR(30),
+	salary DECIMAL,
+	department_id INT
+);
+
+CREATE TABLE employees
+(
+	id INT PRIMARY KEY,
+	first_name VARCHAR(30),
+	last_name VARCHAR(30),
+	role_id INT,
+	manager_id INT -- reference to the manager of the current employee. Field may be null if employee has no manager --
 );
