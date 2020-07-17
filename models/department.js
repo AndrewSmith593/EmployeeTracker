@@ -9,6 +9,19 @@ class Department {
         return orm.selectAll('departments')
     }
 
+      // fires off and holds two parameters when cat.create is fired from catsController
+  create(columns, values) {
+    // returns the return value of orm.create with "cats", columns, and values as the params
+    return orm.create('departments', columns, values)
+  }
+  update(objColVals, condition) {
+    return orm.update('departments', objColVals, condition)
+  }
+  // TODO: create a remove method that references orm.delete
+  remove(objColVals, value) {
+    return orm.remove('departments', objColVals, value);
+  }
+
 }
 
 

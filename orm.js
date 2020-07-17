@@ -17,6 +17,36 @@ class ORM {
         return this.connection.query(queryString, table)
     }
 
+    // fired off when orm.create is fired off from cat.js. parameters already filled in from cats.js
+  create(table, columns, values) {
+    console.log(`orm.create was fired off!`)
+    // var for the querystring... insert sql command to table param, 
+    const queryString = `INSERT INTO ?? (${columns.join(', ')}) VALUES (${this.printQuestionMarks(values.length)})`;
+
+    console.log(queryString);
+
+    return this.connection.query(queryString, [table, ...values])
+  }
+
+  update(table, objColVals, id) {
+    console.log(`orm.update was fired off!`)
+    var queryString = `UPDATE ?? SET ? WHERE ?`;
+
+    console.log(queryString);
+
+    return this.connection.query(queryString, [table, objColVals, id])
+  }
+
+  // TODO: Create method that will allow us to remove a row from the table
+  remove(table, objColVals, value) {
+    console.log(`orm.remove was fired off!`)
+    var queryString = `DELETE FROM ?? WHERE ?? = ?`;
+
+    console.log(queryString);
+
+    return this.connection.query(queryString, [table, objColVals, value])
+  }
+
 // also a function to return total salaries of departments
 // starter code for the addition function:
 // var sum = function(numOne, numTwo) {
