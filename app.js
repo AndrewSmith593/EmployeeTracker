@@ -1,5 +1,7 @@
 const inquirer = require("inquirer");
 const department = require("./models/department.js");
+const employee = require("./models/employee.js");
+const role = require("./models/role.js");
 // const { selectAll } = require("./orm.js");
 
 

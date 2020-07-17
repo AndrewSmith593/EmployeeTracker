@@ -2,15 +2,15 @@
 const orm = require("./../orm.js");
 
 
-class Department {
+class Employee {
 
     selectAll() {
-        console.log(`department.selectAll was fired off!`)
-        return orm.selectAll('departments')
+        console.log(`employee.selectAll was fired off!`)
+        return orm.selectAll('employees')
     }
 
 }
 
 
 
-module.exports = new Department();
+module.exports = new Employee();
