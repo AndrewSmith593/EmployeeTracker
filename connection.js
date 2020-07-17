@@ -3,7 +3,7 @@ const util = require('util');
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: 8080,
+    port: 3306,
     user: "root",
     password: "Thundercat12!",
     database: "employee_db"
@@ -12,10 +12,10 @@ const connection = mysql.createConnection({
 // make connection
 connection.connect(function(err) {
     if (err) {
-        console.error("error connecting: " + err.stack);
+        console.error("here is the error: " + err);
         return;
     }
-    console.log("connected as id " + connection.threadId);
+    console.log(`\n\nconnected as id ${connection.threadId}!`);
 });
 
 connection.query = util.promisify(connection.query);
