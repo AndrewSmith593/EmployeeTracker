@@ -11,11 +11,10 @@ class ORM {
 
     selectAll(table)  {
         console.log(`orm.selectAll was fired off!`)
-        console.log(`here is the table: ${table}`)
         // set the queryString to select all from a table
         const queryString = 'SELECT * FROM ??';
         // return the selected table data
-        return this.connection.query(queryString, [table])
+        return this.connection.query(queryString, table)
     }
 
 // also a function to return total salaries of departments
@@ -28,7 +27,7 @@ class ORM {
 
 module.exports = new ORM(connection);
 
-const test = new ORM(connection);
-test.selectAll('departments')
-    .then(results => console.log(results))
+// const test = new ORM(connection);
+// test.selectAll('departments')
+//     .then(results => console.table(results))
 

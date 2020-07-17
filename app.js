@@ -17,15 +17,15 @@ inquirer
         switch (view) {
             case 'Departments':
                 var displayData = await department.selectAll();
-                console.table(view)
+                console.table(displayData)
                 break;
             case 'Employees':
                 var displayData = await employee.selectAll();
-                console.table(view)
+                console.table(displayData)
                 break;
             case 'Roles':
                 var displayData = await role.selectAll();
-                console.table(view)
+                console.table(displayData)
                 break;
             default:
                 break;
