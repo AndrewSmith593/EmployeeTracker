@@ -10,7 +10,7 @@ class Role {
     }
 
           // fires off and holds two parameters when cat.create is fired from catsController
-  create(columns, values) {
+  createRole(columns, values) {
     // returns the return value of orm.create with "cats", columns, and values as the params
     return orm.create('roles', columns, values)
   }

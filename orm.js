@@ -18,14 +18,14 @@ class ORM {
     }
 
     // fired off when orm.create is fired off from cat.js. parameters already filled in from cats.js
-  create(table, columns, values) {
+  create(table, columns, deptName) {
     console.log(`orm.create was fired off!`)
     // var for the querystring... insert sql command to table param, 
-    const queryString = `INSERT INTO ?? (${columns.join(', ')}) VALUES (${this.printQuestionMarks(values.length)})`;
+    const queryString = `INSERT INTO ?? (${columns}) VALUES ?`;
 
     console.log(queryString);
 
-    return this.connection.query(queryString, [table, ...values])
+    return this.connection.query(queryString, [table, deptName])
   }
 
   update(table, objColVals, id) {

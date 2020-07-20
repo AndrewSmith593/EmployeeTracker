@@ -2,7 +2,21 @@ const inquirer = require("inquirer");
 const department = require("./models/department.js");
 const employee = require("./models/employee.js");
 const role = require("./models/role.js");
+const { createDepartment } = require("./models/department.js");
 // const { selectAll } = require("./orm.js");
+
+/*
+Question flow:
+1. What would you like to do?
+    answers: view departments, view employees, view roles, add department, add employee, add role, update department, update employee, update role
+2. second question will be asking for the details needed for that action
+    a) the 'table' param will be filled out, then all other table columns will be filled out with subsequent questions in those question blocks
+
+Questions:
+
+
+*/
+
 
 inquirer
     .prompt([
@@ -13,7 +27,7 @@ inquirer
             choices: ["View", "Add", "Delete"]
         }
     ])
-    .then(async ({actionChoice}) => {
+    .then(async ({ actionChoice }) => {
         console.log(`${actionChoice} was the answer!`);
         switch (actionChoice) {
             case 'View':
@@ -38,75 +52,94 @@ inquirer
 
 const view = () => {
 
-inquirer
-    .prompt([
-        {
-            type: "list",
-            message: "Which would you like to view?",
-            name: "viewChoice",
-            choices: ["Departments", "Employees", "Roles"]
-        }
-    ])
-    .then(async ({ viewChoice }) => {
-        console.log(`${viewChoice} was the answer!`);
-        switch (viewChoice) {
-            case 'Departments':
-                var displayData = await department.selectAll();
-                console.table(displayData)
-                break;
-            case 'Employees':
-                var displayData = await employee.selectAll();
-                console.table(displayData)
-                break;
-            case 'Roles':
-                var displayData = await role.selectAll();
-                console.table(displayData)
-                break;
-            default:
-                break;
-        }
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "Which would you like to view?",
+                name: "viewChoice",
+                choices: ["Departments", "Employees", "Roles"]
+            }
+        ])
+        .then(async ({ viewChoice }) => {
+            console.log(`${viewChoice} was the answer!`);
+            switch (viewChoice) {
+                case 'Departments':
+                    var displayData = await department.selectAll();
+                    console.table(displayData)
+                    break;
+                case 'Employees':
+                    var displayData = await employee.selectAll();
+                    console.table(displayData)
+                    break;
+                case 'Roles':
+                    var displayData = await role.selectAll();
+                    console.table(displayData)
+                    break;
+                default:
+                    break;
+            }
 
-    })
-    .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
 };
 
 
 const add = () => {
 
     inquirer
-    .prompt([
-        {
-            type: "list",
-            message: "What would you like to add?",
-            name: "tableToAddTo",
-            choices: ["Department", "Employee", "Role"]
-        }
-    ])
-    .then(async ({ tableToAddTo }) => {
+        .prompt([
+            {
+                type: "list",
+                message: "What would you like to add?",
+                name: "whatToAdd",
+                choices: ["Department", "Employee", "Role"]
+            }
+        ])
+        .then(async (answer) => {
 
-        console.log(`We're gonna add something to the table: ${tableToAddTo}!`);
+            console.log(`We're gonna add a: ${answer.whatToAdd}!`);
 
-        switch (tableToAddTo) {
-            case 'Department':
-                console.log("user chose to add a new Department...");
-                createDepartment();
-                break;
-            case 'Employee':
-                console.log("user chose to add a new Employee...");
-                createEmployee();
-                break;
-            case 'Role':
-                console.log("user chose to add a new Role...");
-                createRole();
-                break;
-            default:
-                break;
-        }
+            switch (answer.whatToAdd) {
+                case 'Department':
+                    console.log("user chose to add a new Department...");
+                    addDepartment();
+                    break;
+                case 'Employee':
+                    console.log("user chose to add a new Employee...");
+                    addEmployee();
+                    break;
+                case 'Role':
+                    console.log("user chose to add a new Role...");
+                    addRole();
+                    break;
+                default:
+                    break;
+            }
 
-    })
-    .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
 }
 
+const addDepartment = () => {
+
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the name of the new department?",
+                name: "newDept"
+            }
+        ])
+        .then(async (answer) => {
+
+            console.log(`The new department is called: ${answer}!`);
+            department.createDepartment("dept_name", answer);
+            console.table(displayData)
+        })
+        .catch(err => console.log(err));
+
+}
 
 
 // const createDepartment = () => {

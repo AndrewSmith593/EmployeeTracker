@@ -10,9 +10,9 @@ class Department {
     }
 
       // fires off and holds two parameters when cat.create is fired from catsController
-  create(columns, values) {
+  createDepartment(columns, deptName) {
     // returns the return value of orm.create with "cats", columns, and values as the params
-    return orm.create('departments', columns, values)
+    return orm.create('departments', columns, deptName)
   }
   update(objColVals, condition) {
     return orm.update('departments', objColVals, condition)
