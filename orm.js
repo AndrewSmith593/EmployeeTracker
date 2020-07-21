@@ -21,11 +21,11 @@ class ORM {
   create(table, columns, deptName) {
     console.log(`orm.create was fired off!`)
     // var for the querystring... insert sql command to table param, 
-    const queryString = `INSERT INTO ?? (${columns}) VALUES ?`;
+    const queryString = `INSERT INTO ${table} (${columns}) VALUES ('${deptName}')`;
 
     console.log(queryString);
 
-    return this.connection.query(queryString, [table, deptName])
+    return this.connection.query(queryString)
   }
 
   update(table, objColVals, id) {

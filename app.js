@@ -133,8 +133,8 @@ const addDepartment = () => {
         ])
         .then(async (answer) => {
 
-            console.log(`The new department is called: ${answer}!`);
-            department.createDepartment("dept_name", answer);
+            console.log(`The new department is called: ${answer.newDept}!`);
+            var displayData = await department.createDepartment("dept_name", answer.newDept);
             console.table(displayData)
         })
         .catch(err => console.log(err));
